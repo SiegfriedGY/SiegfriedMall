@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    username: root
+    password: 1234
+    url: jdbc:mysql://127.0.0.1:3306/siegfriedmall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto # 在这里统一调整所有表的主键生成规则（自增）
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+server:
+  port: 10001
+logging:
+  level:
+    com.atguigu.gulimall: debug
+
