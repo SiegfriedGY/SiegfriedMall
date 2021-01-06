@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
 
 //    @Autowired
-//    CategoryDao categoryDao;
+//    CategoryDao categoryDao;  // 引入了MyBatisPlus，使用baseMapper即可，baseMapper就是这个Dao。
 
     @Autowired
     CategoryBrandRelationService categoryBrandRelationService;
