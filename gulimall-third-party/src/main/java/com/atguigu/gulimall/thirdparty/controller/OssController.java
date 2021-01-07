@@ -21,8 +21,9 @@ public class OssController {
     @Autowired
     OSS ossClient;
     /**
-     * 他这里本来写的是OSSClient，但启动报错，说找不到OSSClient这个bean。分析方法是：找到自动配置类，OssContextAutoConfiguration。
-     * 看到里面方法的返回值是OSS接口类型，已经不是实现类类型，所以这里改成OSS。
+     * 他这里本来写的类型是OSSClient，但启动报错，说找不到OSSClient这个bean。
+     * 分析方法是：找到自动配置类，OssContextAutoConfiguration。
+     * 看到里面方法的返回值是OSS接口类型，已经不是实现类类型，所以这里改成OSS接口类型。
      * 尽管OSS只有一个实现类。
      */
 
@@ -39,8 +40,8 @@ public class OssController {
         String host = "https://" + bucket + "." + endpoint; // host的格式为 bucketname.endpoint
         // callbackUrl为 上传回调服务器的URL，请将下面的IP和Port配置为您自己的真实信息。
 //        String callbackUrl = "http://88.88.88.88:8888";
-        String format = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        String dir = format + "/"; // 用户上传文件时指定的前缀。
+        String dateStr = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String dir = dateStr + "/"; // 用户上传文件时指定的前缀。
 
         Map<String, String> respMap = null;
         try {

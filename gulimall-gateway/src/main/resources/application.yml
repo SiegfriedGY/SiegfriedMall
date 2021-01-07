@@ -40,6 +40,7 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
+## 注意这里的routes顺序，把兜底的admin项目放在最后，因为是按照先后顺序执行的
         - id: admin_route
           uri: lb://renren-fast
           predicates:

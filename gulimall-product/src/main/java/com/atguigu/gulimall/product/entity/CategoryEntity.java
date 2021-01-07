@@ -12,8 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
-
-
 /**
  * 商品三级分类
  * 
@@ -21,7 +19,6 @@ import lombok.Data;
  * @email leifengyang@gmail.com
  * @date 2019-10-01 21:08:48
  */
-
 @Data
 @TableName("pms_category")
 public class CategoryEntity implements Serializable {
@@ -67,9 +64,7 @@ public class CategoryEntity implements Serializable {
 	private Integer productCount;
 
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	@TableField(exist=false)
+	@TableField(exist=false)	// 表示 此属性不是表里的字段
 	private List<CategoryEntity> children;
-
-
 
 }
