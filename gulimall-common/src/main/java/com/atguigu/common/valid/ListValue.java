@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface ListValue {
     String message() default "{com.atguigu.common.valid.ListValue.message}";
 
-    Class<?>[] groups() default { };
+    Class<?>[] groups() default { }; // 支持分组校验
 
     Class<? extends Payload>[] payload() default { };
 

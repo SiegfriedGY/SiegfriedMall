@@ -18,14 +18,13 @@ import java.util.Map;
 @RestController
 public class OssController {
 
+     /**
+     * 他这里一开始写的类型是OSSClient类型，但启动报错，说找不到OSSClient这个bean。
+     * 分析方法是：找到自动配置类，OssContextAutoConfiguration。
+     * 看到里面方法的返回值是OSS接口类型，已经不是实现类类型，所以这里改成OSS接口类型，尽管OSS只有一个实现类。
+     */
     @Autowired
     OSS ossClient;
-    /**
-     * 他这里本来写的类型是OSSClient，但启动报错，说找不到OSSClient这个bean。
-     * 分析方法是：找到自动配置类，OssContextAutoConfiguration。
-     * 看到里面方法的返回值是OSS接口类型，已经不是实现类类型，所以这里改成OSS接口类型。
-     * 尽管OSS只有一个实现类。
-     */
 
     @Value("${spring.cloud.alicloud.oss.endpoint}")
     private String endpoint;

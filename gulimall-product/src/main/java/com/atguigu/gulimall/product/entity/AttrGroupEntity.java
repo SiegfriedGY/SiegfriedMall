@@ -46,8 +46,10 @@ public class AttrGroupEntity implements Serializable {
 	 */
 	private Long catelogId;
 
-
-	@TableField(exist = false)
+	/**
+	 * 用于属性分组修改 回显 级联选择器正确选择，需要一个所属分类的完整三级路径
+	 */
+	@TableField(exist = false) // 表示不是数据库中的字段
 	private Long[] catelogPath;
 
 

@@ -56,7 +56,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
 
     @Override
     public void addStock(Long skuId, Long wareId, Integer skuNum) {
-        //1、判断如果还没有这个库存记录新增
+        //1、判断 如果还没有这个库存记录 则新增
         List<WareSkuEntity> entities = wareSkuDao.selectList(new QueryWrapper<WareSkuEntity>().eq("sku_id", skuId).eq("ware_id", wareId));
         if(entities == null || entities.size() == 0){
             WareSkuEntity skuEntity = new WareSkuEntity();
@@ -64,9 +64,10 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             skuEntity.setStock(skuNum);
             skuEntity.setWareId(wareId);
             skuEntity.setStockLocked(0);
-            // 远程查询sku的名字，如果失败，整个事务无需回滚（因为这个是冗余字段）
+            // 远程查询sku的名字，如果失败，整个事务无需回滚
+            // （因为这个是冗余字段，没必要因为它失败，整个事务回滚）
             //1、自己catch异常
-            //2. TODO 还可以用什么办法让异常出现以后不回滚？高级
+            //2. TODO 还可以用什么办法让异常出现以后不回滚？——高级部分
             try {
                 R info = productFeignService.info(skuId);
                 Map<String,Object> data = (Map<String, Object>) info.get("skuInfo");
@@ -75,9 +76,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
                     skuEntity.setSkuName((String) data.get("skuName"));
                 }
             }catch (Exception e){
-
             }
-
 
             wareSkuDao.insert(skuEntity);
         }else{

@@ -82,9 +82,8 @@ public class BrandController {
 //
 //        }
 
+        // 有了统一处理异常的exceptionControllerAdvice，这里就不再需要bindingResult，而是有异常直接跑出去，被exceptionHandler处理。
         brandService.save(brand);
-
-
         return R.ok();
     }
 
@@ -98,11 +97,11 @@ public class BrandController {
         return R.ok();
     }
     /**
-     * 修改状态
+     * 修改状态（就是表格里的那个开关，此时只修改这一个字段，不用提交品牌名）
      */
     @RequestMapping("/update/status")
     //@RequiresPermissions("product:brand:update")
-    public R updateStatus(@Validated(UpdateStatusGroup.class) @RequestBody BrandEntity brand){
+    public R updateShowStatus(@Validated(UpdateStatusGroup.class) @RequestBody BrandEntity brand){
         brandService.updateById(brand);
         return R.ok();
     }

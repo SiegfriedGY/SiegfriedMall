@@ -29,18 +29,21 @@ public class GulimallExceptionControllerAdvice {
         BindingResult bindingResult = e.getBindingResult();
 
         Map<String,String> errorMap = new HashMap<>();
-        bindingResult.getFieldErrors().forEach((fieldError)->{
-            errorMap.put(fieldError.getField(),fieldError.getDefaultMessage());
-        });
-        return R.error(BizCodeEnume.VAILD_EXCEPTION.getCode(),
-                BizCodeEnume.VAILD_EXCEPTION.getMsg()).put("data",errorMap);
+        bindingResult.getFieldErrors().forEach(fieldError -> errorMap.put(fieldError.getField(),fieldError.getDefaultMessage()));
+        return R.error(BizCodeEnume.INVALID_EXCEPTION.getCode(),
+                BizCodeEnume.INVALID_EXCEPTION.getMsg()).put("data",errorMap);
     }
 
+    /**
+     * 兜底的异常处理
+     * @param throwable
+     * @return
+     */
     @ExceptionHandler(value = Throwable.class)
     public R handleException(Throwable throwable){
         log.error("错误：",throwable);
-        return R.error(BizCodeEnume.UNKNOW_EXCEPTION.getCode(),
-                BizCodeEnume.UNKNOW_EXCEPTION.getMsg());
+        return R.error(BizCodeEnume.UNKNOWN_EXCEPTION.getCode(),
+                BizCodeEnume.UNKNOWN_EXCEPTION.getMsg());
     }
 
 
